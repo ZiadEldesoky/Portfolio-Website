@@ -28,11 +28,11 @@ const Projects = () => {
       featured: false
     },
     {
-      title: 'E-Commerce Web App',
-      description: 'Full-featured e-commerce website with authentication, product management, and cart functionality using the MERN stack.',
-      tech: ['MERN Stack', 'Tailwind CSS', 'JWT'],
+      title: 'Ziad Online Store',
+      description: 'My first e-commerce project built with pure JavaScript, HTML, CSS, and SCSS. Features product catalog, shopping cart, and responsive design. A foundational project from early learning days.',
+      tech: ['JavaScript', 'HTML', 'CSS', 'SCSS'],
       liveUrl: '#',
-      githubUrl: 'https://github.com/ZiadEldesoky',
+      githubUrl: 'https://github.com/ZiadEldesoky/Ziad-Online-Store',
       image: '🛍️',
       featured: false
     },
