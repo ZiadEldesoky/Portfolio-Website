@@ -1,59 +1,93 @@
+import { useEffect, useRef, useState } from 'react';
+
 const About = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="about" className="py-28 px-8 w-full bg-[var(--bg-secondary)]">
-      <div className="w-full max-w-7xl mx-auto">
+    <section id="about" ref={sectionRef} className="py-40 px-6 w-full">
+      <div className="w-full max-w-6xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-20">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">About Me</h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] mx-auto rounded-full"></div>
+        <div className={`text-center mb-20 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 section-title">About Me</h2>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left - Image/Avatar */}
-          <div className="flex justify-center">
-            <div className="relative">
-              <div className="w-64 h-64 md:w-80 md:h-80 rounded-2xl bg-gradient-to-br from-[var(--primary)] to-[var(--accent)] p-1">
-                <div className="w-full h-full rounded-2xl bg-[var(--bg-card)] flex items-center justify-center">
-                  <span className="text-7xl md:text-8xl">👨‍💻</span>
+          <div className={`flex justify-center lg:justify-start transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
+            <div className="relative group">
+              {/* Main image container */}
+              <div className="w-64 h-64 md:w-72 md:h-72 rounded-2xl bg-gradient-to-br from-purple-500/20 via-cyan-500/10 to-pink-500/20 border border-[var(--border-color)] overflow-hidden">
+                <div className="w-full h-full flex items-center justify-center bg-[var(--bg-secondary)]/50">
+                  <span className="text-6xl md:text-7xl group-hover:scale-110 transition-transform duration-500">👨‍💻</span>
                 </div>
               </div>
-              {/* Decorative elements */}
-              <div className="absolute -top-4 -right-4 w-20 h-20 bg-[var(--primary)]/20 rounded-full blur-xl"></div>
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-[var(--accent)]/20 rounded-full blur-xl"></div>
+              
+              {/* Floating badges */}
+              <div className="absolute -top-3 -right-3 px-3 py-1.5 rounded-lg bg-gradient-to-r from-purple-500 to-cyan-500 text-white text-xs font-semibold shadow-lg">
+                1+ Year Exp
+              </div>
+              <div className="absolute -bottom-3 -left-3 px-3 py-1.5 rounded-lg glass-card text-xs font-medium flex items-center gap-1.5">
+                <span className="text-base">🎓</span> ITI Graduate
+              </div>
             </div>
           </div>
 
           {/* Right - Content */}
-          <div>
-            <h3 className="text-2xl font-semibold mb-4">
-              A passionate developer from Egypt 🇪🇬
+          <div className={`transition-all duration-700 delay-400 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
+            <h3 className="text-2xl md:text-3xl font-bold mb-6">
+              A passionate developer from{' '}
+              <span className="gradient-text">Egypt</span> 🇪🇬
             </h3>
-            <p className="text-[var(--text-secondary)] mb-6 leading-relaxed">
-              I'm a Full Stack Developer currently studying at ITI (Information Technology Institute). 
-              I specialize in building modern, responsive web applications using cutting-edge technologies 
-              like React, Angular, Node.js, and MongoDB.
-            </p>
-            <p className="text-[var(--text-secondary)] mb-8 leading-relaxed">
-              I'm passionate about creating clean, efficient code and delivering exceptional user experiences. 
-              When I'm not coding, you can find me exploring new technologies and contributing to open-source projects.
-            </p>
+            
+            <div className="space-y-4 text-[var(--text-secondary)] text-lg leading-relaxed mb-8">
+              <p>
+                I'm a Full Stack Developer currently studying at <span className="text-[var(--text-primary)] font-medium">ITI (Information Technology Institute)</span>. 
+                I specialize in building modern, responsive web applications using cutting-edge technologies.
+              </p>
+              <p>
+                I focus on writing <span className="text-[var(--primary)]">scalable code</span>, creating 
+                smooth user experiences, and delivering polished digital products.
+              </p>
+            </div>
 
-            {/* Quick Info */}
-            <div className="grid grid-cols-2 gap-6">
-              <div className="p-6 bg-[var(--bg-card)] rounded-xl border border-[var(--border-color)]">
-                <p className="text-[var(--primary)] font-semibold text-2xl">4+</p>
-                <p className="text-[var(--text-secondary)] text-sm">Projects Completed</p>
+            {/* Quick Stats */}
+            <div className="grid grid-cols-3 gap-4">
+              <div className="glass-card p-5 rounded-2xl text-center group">
+                <p className="text-3xl md:text-4xl font-bold gradient-text mb-1 group-hover:scale-110 transition-transform">4+</p>
+                <p className="text-[var(--text-muted)] text-sm">Projects</p>
               </div>
-              <div className="p-4 bg-[var(--bg-card)] rounded-xl border border-[var(--border-color)]">
-                <p className="text-[var(--primary)] font-semibold text-2xl">10+</p>
-                <p className="text-[var(--text-secondary)] text-sm">Technologies Used</p>
+              <div className="glass-card p-5 rounded-2xl text-center group">
+                <p className="text-3xl md:text-4xl font-bold gradient-text mb-1 group-hover:scale-110 transition-transform">10+</p>
+                <p className="text-[var(--text-muted)] text-sm">Technologies</p>
+              </div>
+              <div className="glass-card p-5 rounded-2xl text-center group">
+                <p className="text-3xl md:text-4xl font-bold gradient-text mb-1 group-hover:scale-110 transition-transform">100%</p>
+                <p className="text-[var(--text-muted)] text-sm">Dedication</p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default About
+export default About;
