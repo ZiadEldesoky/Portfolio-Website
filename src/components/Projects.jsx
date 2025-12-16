@@ -27,7 +27,7 @@ const Projects = () => {
       description: 'Full-featured e-commerce platform with JWT auth, Quick View, Related Products, Recently Viewed, Coupons, PWA support, and Admin Dashboard.',
       tech: ['Angular 18', 'Node.js', 'MongoDB', 'TypeScript', 'SCSS'],
       liveUrl: 'https://angular-e-commerce-webiste.vercel.app/',
-      githubUrl: 'https://github.com/ZiadEldesoky/Angular-E-commerce-webiste',
+      githubUrl: 'https://github.com/ZiadEldesoky/Angular-Shop-Demo',
       gradient: 'from-purple-500/20 via-pink-500/10 to-red-500/20',
       icon: '🛒',
     },
